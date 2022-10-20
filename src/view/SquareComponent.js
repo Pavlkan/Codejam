@@ -1,11 +1,11 @@
 export class SquareComponent {
-    constructor(number) {
+    constructor(square) {
         this.element = document.createElement("div");
         this.element.classList.add("square");
-        this._render(number);
+        this._render(square);
     }
 
-    _render(number) {
-        this.element.innerText = number;
+    _render(square) {
+        this.element.innerText = square.number;
     }
 }

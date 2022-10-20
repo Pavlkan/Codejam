@@ -1,0 +1,412 @@
+/* ———————————————————————————————————————————————————————————————————————————————
+==============================—Style—normalization—===============================
+——————————————————————————————————————————————————————————————————————————————— */
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+*,*:before,*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:focus, :active {outline: none;}
+a:focus, a:active {outline: none;}
+
+nav, footer, header, aside {display: block;}
+
+html, body {
+    height: 100%;
+    width: 100%;
+
+    font-family: 'Deco';
+    font-size: 100%;
+    line-height: 1;
+    font-size: 14px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+@font-face {
+	font-family: 'Deco'; 
+	src: url(./portoAlegreDeco.ttf); 
+}
+
+.button {
+    max-width: 10vw;
+    width: 100%;
+    min-height: 4vw;
+
+    border: 3px solid rgb(125, 148, 156);
+    border-radius: 10px;
+
+    font-size: 1.5vw;
+    font-family: 'Deco';
+
+    background: radial-gradient(#f2f2f2,#dbdbdb,#eaeaea);
+    /* background: 
+    linear-gradient(#F1F3F2 0 0) padding-box, 
+    linear-gradient(315.75deg, rgb(255, 92, 47) 30.06%,
+     rgb(255, 177, 22) 50.74%,
+     #ffd106 80.49%,
+     #ff5c17 127.9%,
+     #ff9e0c 149.54%) border-box;
+    border: 2px solid transparent;
+    display: inline-block; */
+}
+
+input, button, textarea {font-family: inherit;}
+
+input::-ms-clear {display: none;}
+button {cursor: pointer;}
+button::-moz-focus-inner {padding: 0; border: 0;}
+a, a:visited {text-decoration: none;}
+a:hover {text-decoration: none;}
+ul li {list-style: none;}
+img {vertical-align: top;}
+
+h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
+
+.wrapper {
+    min-height: 100%;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    
+    
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ———————————————————————————————————————————————————————————————————————————————
+======================================—BODY—======================================
+——————————————————————————————————————————————————————————————————————————————— */
+
+.main {
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+/* ------------------------------puzzle-stylisation---------------------------- */
+
+.puzzle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.line {
+    background: linear-gradient(to top right, #737e9e,#8fabb1, #dbdbdb);
+    border: 0.5px solid #5b6276;
+}
+
+.line_left {
+    background: linear-gradient(to top left, #737e9e,#8fabb1, #dbdbdb);
+    border: 0.5px solid #5b6276;
+}
+
+.vertical-line {
+    width: 20px;
+}
+
+.horizontal-line {
+    height: 20px;
+}
+
+.column {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.column_right {
+    flex-direction: row-reverse;
+}
+
+.column__first-line {
+    height: 45vw;
+}
+
+.column__first-container,
+.column__second-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.column__first-container_right, 
+.column__second-container_right {
+    align-items: flex-start;
+}
+
+.column__middle-line {
+    width: 63px;
+
+    text-align: center;
+    font-size: 20px;
+}
+
+.column__bottom-line,
+.column__upper-line {
+    width: 60px;
+}
+
+.column__third-container_top {
+    display: flex;
+    align-items: flex-end;
+}
+
+.column__third-container_bottom {
+    display: flex;
+    align-items: flex-start;
+}
+
+.column__third-container_top-right,
+.column__third-container_bottom-right {
+    flex-direction: row-reverse;
+}
+
+.column__near-line  {
+    height: 14vw;
+}
+
+.column__outer-line {
+    height: 17vw;
+}
+
+.puzzle__top-line,
+.puzzle__bottom-line {
+    height: 30px;
+    width: 100%;
+}
+
+/* --------------------------puzzle-stylisation-shadows------------------------ */
+
+
+.column__near-line_left-top,
+.column__outer-line_left-top {
+    border-radius: 30px 0 0 0;
+    box-shadow: -4px 0px 10px 3px rgba(0, 0, 0, 0.4);
+}
+
+.column__near-line_left-bottom,
+.column__near-line_left-top {
+    border-left: 1.5px solid #5b6276;
+}
+
+.column__near-line_left-bottom,
+.column__outer-line_left-bottom {
+    border-radius: 0 0 0 30px;
+    box-shadow: -4px 0px 10px 3px rgba(0, 0, 0, 0.4);
+}
+
+.column__bottom-line_left,
+.column__upper-line_left {
+    z-index: 1;
+    border-radius: 3px 0 0 3px;
+    box-shadow: 
+    -4px 0px 10px 3px rgba(0, 0, 0, 0.2),
+    0px 4px 10px 3px rgba(0, 0, 0, 0.2),
+    0px -4px 10px 3px rgba(0, 0, 0, 0.2);
+}
+
+.column__bottom-line_left {
+    border-radius: 30px 0 0 3px;
+}
+
+.column__upper-line_left {
+    border-radius: 3px 0 0 30px;
+}
+
+.column__middle-line_left {
+    z-index: 2; 
+    border-radius: 3px 0 0 3px;
+    box-shadow: 
+    -4px 0px 10px 3px rgba(0, 0, 0, 0.2),
+    0px 4px 10px 4px rgba(0, 0, 0, 0.6),
+    0px -4px 10px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.column__first-line_left {
+    z-index: 3;
+    border-radius: 30px 0 0 30px;
+    box-shadow: 
+    -4px 0px 10px 3px rgba(0, 0, 0, 0.4),
+    2px 0px 10px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ____________________________________________________________________________ */
+
+.column__near-line_right-top,
+.column__outer-line_right-top {
+    border-radius: 0 30px 0 0;
+    box-shadow: 4px 0px 10px 3px rgba(0, 0, 0, 0.4);
+}
+
+.column__near-line_right-bottom,
+.column__near-line_right-top {
+    border-right: 1.5px solid #5b6276;
+}
+
+.column__near-line_right-bottom,
+.column__outer-line_right-bottom {
+    border-radius: 0 0 30px 0;
+    box-shadow: 4px 0px 10px 3px rgba(0, 0, 0, 0.4);
+}
+
+.column__bottom-line_right,
+.column__upper-line_right {
+    z-index: 1;
+    box-shadow: 
+    -4px 0px 10px 3px rgba(0, 0, 0, 0.2),
+    0px -4px 10px 3px rgba(0, 0, 0, 0.2),
+    0px -4px 10px 3px rgba(0, 0, 0, 0.2);
+}
+
+.column__bottom-line_right {
+    border-radius: 0 30px 0 0;
+}
+
+.column__upper-line_right {
+    border-radius: 0 0 30px 0;
+}
+
+.column__middle-line_right {
+    z-index: 2; 
+    border-radius: 0 3px 3px 0;
+    box-shadow: 
+    -4px 0px 10px 3px rgba(0, 0, 0, 0.2),
+    0px -4px 10px 3px rgba(0, 0, 0, 0.2),
+    0px 4px 10px 3px rgba(0, 0, 0, 0.6);
+}
+
+.column__first-line_right {
+    z-index: 3;
+    border-radius: 0 30px 30px 0;
+    box-shadow: 
+    4px 0px 10px 3px rgba(0, 0, 0, 0.4),
+    -2px 0px 10px 3px rgba(0, 0, 0, 0.4);
+}
+
+.puzzle__top-line {
+    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px -4px 10px 3px rgba(0, 0, 0, 0.4);
+}
+
+.puzzle__bottom-line_top {
+    z-index: 1;
+}
+
+.puzzle__bottom-line {
+    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* --------------------------------puzzle-display------------------------------ */
+
+.puzzle__body {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.puzzle__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 40.2%;
+
+    background-color: #060c1e;
+
+    transition: ease 0.3s;
+}
+
+._menuActive {
+    width: 100%;
+}
+
+/* --------------------------------option-buttons------------------------------ */
+
+.option-buttons {
+    width: 20%;
+    height: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    border-radius: 10px;
+}
+
+.info {
+    width: 20%;
+}
+
+.puzzle__display {
+    position: relative;
+    border-radius: 50%;
+}
+
+.puzzle__circle {
+    position: absolute;
+    z-index: 5;
+    top: -20vw;
+    left: -20vw;
+    width: 40vw;
+    height: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15%;
+    background: radial-gradient(black,#20242e, #737e9e, #20242e, #4a4f5b );
+    
+    border: 5px solid #797c84;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.76);
+}
+
+.puzzle__grid-container {
+    display: grid;
+    grid-template: repeat(4, 6vw) / repeat(4, 6vw);
+    gap: 0.5vw 0.5vw;
+    
+    padding: 5vw;
+
+    border: 0.5px solid rgb(223, 255, 208);
+    box-shadow: 0px 0px 15px 2px rgba(230, 255, 219, 0.564);
+    background: #10231d;
+    border-radius: 150px;
+}
+
+.puzzle__element {
+    border: 2px solid rgb(4, 255, 0);
+    border-radius: 10px;
+
+    background-color: #004509;
+}
+
+.puzzle__bottom-line_bottom, 
+.puzzle__top-line_top {
+    height: 70px;
+}

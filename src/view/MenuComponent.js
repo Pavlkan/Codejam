@@ -3,7 +3,6 @@ export class MenuComponent {
         this.menuController = menuController;
         this.element = document.createElement("div");
         this.element.classList.add("menu");
-        this.startButton = null;
 
         this._render();
         this._addListeners();

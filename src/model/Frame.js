@@ -8,12 +8,12 @@ export class Frame {
 
     move(square) {
         let empty = this._getNearEmpty(square);
-        if (!empty) return this.grid;
+        if (!empty) return false;
         let updatedSquare = new Square(square.number, empty.i, empty.j);
         let updatedEmpty = new Square(empty.number, square.i, square.j);
         this.grid[empty.i][empty.j] = updatedSquare;
         this.grid[square.i][square.j] = updatedEmpty;
-        return this.grid;
+        return true;
     }
 
     _getNearEmpty(square) {

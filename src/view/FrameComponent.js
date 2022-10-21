@@ -4,7 +4,7 @@ export class FrameComponent {
     constructor() {
         this.element = document.createElement("div");
         this.element.classList.add("frame");
-        this.controller = null;
+        this.frameController = null;
         this._addListeners();
     }
 
@@ -17,7 +17,7 @@ export class FrameComponent {
     }
 
     setController(controller) {
-        this.controller = controller;
+        this.frameController = controller;
     }
 
     _addListeners() {
@@ -25,7 +25,7 @@ export class FrameComponent {
             const squareClicked = event.target.closest(".square");
             if (squareClicked) {
                 const square = squareClicked.square;
-                this.controller.move(square);
+                this.frameController.move(square);
             }
         });
     }

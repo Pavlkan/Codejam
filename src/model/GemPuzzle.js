@@ -1,17 +1,31 @@
 import { Frame } from "./Frame.js";
+import { GameState } from "./GameState.js";
 
 export class GemPuzzle {
     constructor(size) {
         this.size = size;
-        this.frame = null;
+        this.state = new GameState();
     }
 
     shuffleAndStart() {
-        return (this.frame = new Frame(this.size));
+        this.state = new GameState();
+        this.frame = new Frame(this.size);
     }
 
     move(square) {
-        return this.frame.move(square);
+        let successMove = this.frame.move(square);
+        if (successMove) {
+            this.state.updateMoves();
+        }
+        return successMove;
+    }
+
+    getFrame() {
+        return this.frame.grid;
+    }
+
+    getGameState() {
+        return this.state;
     }
 
     saveResults() {}

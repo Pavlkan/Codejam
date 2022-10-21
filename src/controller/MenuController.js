@@ -1,11 +1,15 @@
 export class MenuController {
-    constructor(gemPuzzle, frameComponent) {
+    constructor(gemPuzzle, frameComponent, gameStateComponent) {
         this.gemPuzzle = gemPuzzle;
         this.frameComponent = frameComponent;
+        this.gameStateComponent = gameStateComponent;
     }
 
     shuffleAndStart() {
-        let { grid } = this.gemPuzzle.shuffleAndStart();
-        this.frameComponent.updateFrame(grid.flat());
+        this.gemPuzzle.shuffleAndStart();
+        this.gameStateComponent.updateMoves(
+            this.gemPuzzle.getGameState().movesCount
+        );
+        this.frameComponent.updateFrame(this.gemPuzzle.getFrame().flat());
     }
 }

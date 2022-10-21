@@ -47,8 +47,8 @@ img {vertical-align: top;}
 h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
 
 .frame {
-    width: 410px;
-    height: 410px;
+    width: 310px;
+    height: 310px;
     border: 1px solid black;
     display: flex;
     flex-wrap: wrap;
@@ -58,4 +58,8 @@ h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
     width: 100px;
     height: 100px;
     border: 1px solid green;
+}
+
+.empty {
+    background-color: gray;
 }

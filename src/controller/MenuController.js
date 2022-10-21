@@ -5,7 +5,7 @@ export class MenuController {
     }
 
     shuffleAndStart() {
-        let { frame } = this.gemPuzzle.shuffleAndStart();
-        this.frameComponent.updateFrame(frame.flat());
+        let { grid } = this.gemPuzzle.shuffleAndStart();
+        this.frameComponent.updateFrame(grid.flat());
     }
 }

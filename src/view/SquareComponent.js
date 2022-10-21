@@ -6,6 +6,11 @@ export class SquareComponent {
     }
 
     _render(square) {
-        this.element.innerText = square.number;
+        this.element.square = square;
+        if (square.isEmpty()) {
+            this.element.classList.add("empty");
+        } else {
+            this.element.innerText = square.number;
+        }
     }
 }

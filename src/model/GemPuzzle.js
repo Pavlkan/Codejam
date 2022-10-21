@@ -10,6 +10,10 @@ export class GemPuzzle {
         return (this.frame = new Frame(this.size));
     }
 
+    move(square) {
+        return this.frame.move(square);
+    }
+
     saveResults() {}
 
     getResults() {}

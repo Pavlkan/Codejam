@@ -1,3 +1,5 @@
+import { CongratulationsComponent } from "../view/CongratulationsComponent.js";
+
 export class FrameController {
     constructor(gemPuzzle, frameComponent, gameStateComponent) {
         this.gemPuzzle = gemPuzzle;
@@ -26,6 +28,16 @@ export class FrameController {
                 this.gameStateComponent.stopTimer();
             }
             this.frameComponent.unlockClicks();
+            this._showCongratulationIfNeeded();
         }, 500);
+    }
+
+    _showCongratulationIfNeeded() {
+        if (this.gemPuzzle.isCompleted()) {
+            let congratulationsComponent = new CongratulationsComponent(
+                this.gemPuzzle.getGameState()
+            );
+            document.body.append(congratulationsComponent.element);
+        }
     }
 }

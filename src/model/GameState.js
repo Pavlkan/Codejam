@@ -25,4 +25,8 @@ export class GameState {
     getSpentTime() {
         return this.spentTime;
     }
+
+    getMovesCount() {
+        return this.movesCount;
+    }
 }

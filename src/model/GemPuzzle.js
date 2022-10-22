@@ -1,6 +1,7 @@
 import { Frame } from "./Frame.js";
 import { GameState } from "./GameState.js";
 import { GameStateStorage } from "./GameStateStorage.js";
+import { GameStatisticsStorage } from "./GameStatisticsStorage.js";
 
 export class GemPuzzle {
     constructor(size) {
@@ -8,6 +9,7 @@ export class GemPuzzle {
         this.state = new GameState();
         this.gameCompleted = false;
         this.gameStateStorage = new GameStateStorage();
+        this.gameStatisticsStorage = new GameStatisticsStorage();
     }
 
     shuffleAndStart() {
@@ -40,6 +42,7 @@ export class GemPuzzle {
             this.gameCompleted = this.frame.isCompleted();
             if (this.gameCompleted) {
                 this.state.stopTimer();
+                this.gameStatisticsStorage.addGameResult(this.state);
             }
         }
         return successMove;

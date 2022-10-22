@@ -9,6 +9,7 @@ export class GemPuzzle {
 
     shuffleAndStart() {
         this.state = new GameState();
+        this.state.startTimer();
         this.frame = new Frame(this.size);
     }
 

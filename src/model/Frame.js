@@ -34,19 +34,54 @@ export class Frame {
         return empty;
     }
 
+    _getArray() {
+        let arr = this._fillArr([NaN], this.size ** 2);
+        if (this._checkCombinations(arr)) {
+            return arr;
+        } else return this._getArray();
+    }
+
+    _fillArr(arr, arrLength) {
+        if (arr.length === arrLength) return arr;
+        let number = this._getRandomInt(1, this.size ** 2);
+        if (!arr.includes(number)) arr.push(number);
+        return this._fillArr(arr, arrLength);
+    }
+
+    _checkCombinations(arr) {
+        let chaosSum = 1;
+        for (let i = 0; i < arr.length; i++) {
+            let currentNumber = arr[i];
+            for (let j = i; j < arr.length; j++) {
+                let comparedNumber = arr[j];
+                if (
+                    currentNumber &&
+                    comparedNumber &&
+                    currentNumber < comparedNumber
+                )
+                    chaosSum++;
+            }
+        }
+        return chaosSum % 2 === 0;
+    }
+
     _generateFrame(size) {
         let frame = [];
+        let valuesArr = this._getArray();
+        let indexCounter = 0;
         for (let i = 0; i < size; i++) {
             frame.push([]);
             for (let j = 0; j < size; j++) {
-                frame[i].push(new Square(i + j, i, j));
+                frame[i].push(new Square(valuesArr[indexCounter], i, j));
+                indexCounter++;
             }
         }
-        frame[frame.length - 1][frame.length - 1] = new Square(
-            NaN,
-            size - 1,
-            size - 1
-        );
         return frame;
+    }
+
+    _getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
     }
 }

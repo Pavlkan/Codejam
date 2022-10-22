@@ -8,10 +8,11 @@ export class FrameComponent {
         this._addListeners();
     }
 
-    updateFrame(squares) {
+    updateFrame(squares, size) {
         this.element.innerHTML = ``;
+        let sizeClass = size === 4 ? "small" : "big";
         for (let square of squares) {
-            let component = new SquareComponent(square);
+            let component = new SquareComponent(square, sizeClass);
             this.element.append(component.element);
         }
     }

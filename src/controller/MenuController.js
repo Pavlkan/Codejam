@@ -10,6 +10,6 @@ export class MenuController {
         this.gameStateComponent.updateMoves(
             this.gemPuzzle.getGameState().movesCount
         );
-        this.frameComponent.updateFrame(this.gemPuzzle.getFrame().flat());
+        this.frameComponent.updateFrame(this.gemPuzzle.getFrame().flat(), this.gemPuzzle.getSize());
     }
 }

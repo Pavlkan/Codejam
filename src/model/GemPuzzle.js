@@ -28,6 +28,10 @@ export class GemPuzzle {
         return this.state;
     }
 
+    getSize() {
+        return this.size;
+    }
+
     saveResults() {}
 
     getResults() {}

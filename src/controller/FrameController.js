@@ -12,7 +12,10 @@ export class FrameController {
         if (successMove) {
             let movesCount = this.gemPuzzle.getGameState().movesCount;
             this.gameStateComponent.updateMoves(movesCount);
-            this.frameComponent.updateFrame(this.gemPuzzle.getFrame().flat());
+            this.frameComponent.updateFrame(
+                this.gemPuzzle.getFrame().flat(),
+                this.gemPuzzle.getSize()
+            );
         }
     }
 }

@@ -16,6 +16,17 @@ export class Frame {
         return true;
     }
 
+    isCompleted() {
+        let first = this.grid[0][0];
+        let last = this.grid[this.size - 1][this.size - 1];
+        if (!first.isEmpty() && !last.isEmpty()) return false;
+        let numbers = this.grid.flat().filter((square) => !square.isEmpty());
+        for (let i = 0; i < numbers.length; i++) {
+            if (numbers[i].number !== i + 1) return false;
+        }
+        return true;
+    }
+
     _getNearEmpty(square) {
         const allowedMoves = [
             [square.i - 1, square.j],

@@ -16,6 +16,9 @@ export class FrameController {
                 this.gemPuzzle.getFrame().flat(),
                 this.gemPuzzle.getSize()
             );
+            if (this.gemPuzzle.gameCompleted) {
+                this.gameStateComponent.stopTimer();
+            }
         }
     }
 }

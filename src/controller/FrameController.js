@@ -7,9 +7,15 @@ export class FrameController {
         this.gameStateComponent.updateMoves(movesCount);
     }
 
-    move(square) {
-        let successMove = this.gemPuzzle.move(square);
-        if (successMove) {
+    move(square, squareComponent) {
+        let isGameCompleted = this.gemPuzzle.isCompleted();
+        let direction = this.gemPuzzle.getMoveDirection(square);
+        if (!direction || isGameCompleted) return;
+        this.frameComponent.lockClicks();
+        squareComponent.animateMove(direction);
+
+        setTimeout(() => {
+            this.gemPuzzle.move(square);
             let movesCount = this.gemPuzzle.getGameState().movesCount;
             this.gameStateComponent.updateMoves(movesCount);
             this.frameComponent.updateFrame(
@@ -19,6 +25,7 @@ export class FrameController {
             if (this.gemPuzzle.gameCompleted) {
                 this.gameStateComponent.stopTimer();
             }
-        }
+            this.frameComponent.unlockClicks();
+        }, 500);
     }
 }

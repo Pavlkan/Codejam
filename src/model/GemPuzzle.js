@@ -45,6 +45,10 @@ export class GemPuzzle {
         return successMove;
     }
 
+    getMoveDirection(square) {
+        return this.frame.getMoveDirection(square);
+    }
+
     getFrame() {
         return this.frame.grid;
     }
@@ -55,6 +59,10 @@ export class GemPuzzle {
 
     getSize() {
         return this.size;
+    }
+
+    isCompleted() {
+        return this.gameCompleted;
     }
 
     saveResults() {

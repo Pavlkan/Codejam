@@ -52,11 +52,15 @@ h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
     border: 1px solid black;
     display: flex;
     flex-wrap: wrap;
+    background-color: gray;
+
 }
 
 .square {
     
     border: 1px solid green;
+    transition: transform 0.5s;
+    background-color: white;
 }
 
 .small {
@@ -75,4 +79,22 @@ h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
 
 .state {
     display: flex;
+
 }
+
+.animate-top {
+    transform: translateY(-200px);
+}
+
+.animate-bottom {
+    transform: translateY(200px);
+}
+
+.animate-left {
+    transform: translateX(-200px);
+}
+
+.animate-right {
+    transform: translateX(200px);
+}
+

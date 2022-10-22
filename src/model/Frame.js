@@ -29,6 +29,20 @@ export class Frame {
         return true;
     }
 
+    getMoveDirection(square) {
+        let empty = this._getNearEmpty(square);
+        if (!empty) return null;
+        if (square.i < empty.i) {
+            return "bottom";
+        } else if (square.i > empty.i) {
+            return "top";
+        } else if (square.j < empty.j) {
+            return "right";
+        } else {
+            return "left";
+        }
+    }
+
     _getNearEmpty(square) {
         const allowedMoves = [
             [square.i - 1, square.j],

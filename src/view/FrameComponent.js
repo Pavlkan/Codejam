@@ -5,6 +5,7 @@ export class FrameComponent {
         this.element = document.createElement("div");
         this.element.classList.add("frame");
         this.frameController = null;
+        this.clicksLocked = false;
         this._addListeners();
     }
 
@@ -21,12 +22,23 @@ export class FrameComponent {
         this.frameController = controller;
     }
 
+    lockClicks() {
+        this.clicksLocked = true;
+    }
+
+    unlockClicks() {
+        this.clicksLocked = false;
+    }
+
     _addListeners() {
         this.element.addEventListener("click", (event) => {
-            const squareClicked = event.target.closest(".square");
-            if (squareClicked) {
-                const square = squareClicked.square;
-                this.frameController.move(square);
+            if (this.clicksLocked) return;
+            const squareElement = event.target.closest(".square");
+            if (squareElement) {
+                this.frameController.move(
+                    squareElement.square,
+                    squareElement.component
+                );
             }
         });
     }

@@ -10,7 +10,8 @@ export class GameStateStorage {
     }
 
     load() {
-        return localStorage.getItem("savedGame");
+        let rawSavedGame = localStorage.getItem("savedGame");
+        return rawSavedGame ? JSON.parse(rawSavedGame) : null;
     }
 
     _prepareState(state) {

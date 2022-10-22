@@ -7,6 +7,23 @@ export class MenuController {
 
     shuffleAndStart() {
         this.gemPuzzle.shuffleAndStart();
+        this._initializeGameView();
+        this.gameStateComponent.updateTimerField();
+    }
+
+    save() {
+        this.gemPuzzle.saveResults();
+    }
+
+    loadAndStart() {
+        this.gemPuzzle.loadAndStart();
+        this._initializeGameView();
+        this.gameStateComponent.updateTimerField(
+            this.gemPuzzle.getGameState().getStartTime()
+        );
+    }
+
+    _initializeGameView() {
         this.gameStateComponent.startTimer(
             this.gemPuzzle.getGameState().getStartTime()
         );
@@ -18,10 +35,4 @@ export class MenuController {
             this.gemPuzzle.getSize()
         );
     }
-
-    save() {
-        this.gemPuzzle.saveResults();
-    }
-
-    load() {}
 }

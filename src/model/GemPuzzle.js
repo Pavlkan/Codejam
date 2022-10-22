@@ -17,6 +17,21 @@ export class GemPuzzle {
         this.gameCompleted = false;
     }
 
+    loadAndStart() {
+        let savedGameState = this.gameStateStorage.load();
+        if (!savedGameState) return;
+        this.state = new GameState(
+            savedGameState.state.movesCount,
+            Date.now() - savedGameState.state.timeSpan
+        );
+        this.frame = new Frame(
+            savedGameState.frame.size,
+            savedGameState.frame.grid
+        );
+        this.size = savedGameState.frame.size;
+        this.gameCompleted = false;
+    }
+
     move(square) {
         if (this.gameCompleted) return false;
         let successMove = this.frame.move(square);
@@ -43,7 +58,7 @@ export class GemPuzzle {
     }
 
     saveResults() {
-        if (this.frame && this.state) {
+        if (this.frame && this.state && !this.gameCompleted) {
             this.gameStateStorage.save(this.state, this.frame);
         }
     }

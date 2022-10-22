@@ -30,5 +30,9 @@ export class MenuComponent {
         this.saveButton.addEventListener("click", () => {
             this.menuController.save();
         });
+
+        this.loadButton.addEventListener("click", () => {
+            this.menuController.loadAndStart();
+        });
     }
 }

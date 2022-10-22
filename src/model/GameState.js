@@ -1,7 +1,8 @@
 export class GameState {
-    constructor() {
-        this.movesCount = 0;
+    constructor(movesCount = 0, startTime = NaN) {
+        this.movesCount = movesCount;
         this.spentTime = NaN;
+        this.startTime = startTime;
     }
 
     updateMoves() {

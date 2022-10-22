@@ -1,9 +1,11 @@
 import { Square } from "./Square.js";
 
 export class Frame {
-    constructor(size) {
+    constructor(size, numbers) {
         this.size = size;
-        this.grid = this._generateFrame(size);
+        this.grid = numbers
+            ? this._generateFrame(size, numbers)
+            : this._generateFrame(size);
     }
 
     move(square) {
@@ -76,9 +78,8 @@ export class Frame {
         return chaosSum % 2 === 0;
     }
 
-    _generateFrame(size) {
+    _generateFrame(size, valuesArr = this._getArray()) {
         let frame = [];
-        let valuesArr = this._getArray();
         let indexCounter = 0;
         for (let i = 0; i < size; i++) {
             frame.push([]);

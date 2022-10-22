@@ -11,12 +11,8 @@ export class GameStateComponent {
 
     startTimer(startTime) {
         this.stopTimer();
-        this._initializeTimerField();
         this.timerId = setInterval(() => {
-            let timeSpan = Math.round((Date.now() - startTime) / 1000);
-            let minutes = Math.floor(timeSpan / 60);
-            let seconds = timeSpan % 60;
-            this.timerField.innerText = `Time: ${minutes}:${seconds}`;
+            this.updateTimerField(startTime);
         }, 1000);
     }
 
@@ -24,8 +20,16 @@ export class GameStateComponent {
         clearInterval(this.timerId);
     }
 
-    _initializeTimerField() {
-        this.timerField.innerText = `Time: 0:0`;
+    updateTimerField(startTime) {
+        let parsedTime = startTime ? this._parseTime(startTime) : `0:0`;
+        this.timerField.innerText = `Time: ${parsedTime}`;
+    }
+
+    _parseTime(startTime) {
+        let timeSpan = Math.round((Date.now() - startTime) / 1000);
+        let minutes = Math.floor(timeSpan / 60);
+        let seconds = timeSpan % 60;
+        return `${minutes}:${seconds}`;
     }
 
     _render() {
@@ -35,7 +39,7 @@ export class GameStateComponent {
 
         this.timerField = document.createElement("div");
         this.timerField.classList.add("timer-field");
-        this._initializeTimerField();
+        this.updateTimerField();
         this.element.append(this.timerField);
     }
 }

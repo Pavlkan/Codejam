@@ -1,11 +1,13 @@
 import { Frame } from "./Frame.js";
 import { GameState } from "./GameState.js";
+import { GameStateStorage } from "./GameStateStorage.js";
 
 export class GemPuzzle {
     constructor(size) {
         this.size = size;
         this.state = new GameState();
         this.gameCompleted = false;
+        this.gameStateStorage = new GameStateStorage();
     }
 
     shuffleAndStart() {
@@ -40,7 +42,11 @@ export class GemPuzzle {
         return this.size;
     }
 
-    saveResults() {}
+    saveResults() {
+        if (this.frame && this.state) {
+            this.gameStateStorage.save(this.state, this.frame);
+        }
+    }
 
     getResults() {}
 }

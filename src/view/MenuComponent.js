@@ -12,11 +12,23 @@ export class MenuComponent {
         this.startButton = document.createElement("button");
         this.startButton.innerText = `Shuffle and start`;
         this.element.append(this.startButton);
+
+        this.saveButton = document.createElement("button");
+        this.saveButton.innerText = `Save`;
+        this.element.append(this.saveButton);
+
+        this.loadButton = document.createElement("button");
+        this.loadButton.innerText = `Load`;
+        this.element.append(this.loadButton);
     }
 
     _addListeners() {
         this.startButton.addEventListener("click", () => {
             this.menuController.shuffleAndStart();
+        });
+
+        this.saveButton.addEventListener("click", () => {
+            this.menuController.save();
         });
     }
 }

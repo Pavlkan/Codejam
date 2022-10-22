@@ -46,7 +46,7 @@ export class Frame {
     }
 
     _getArray() {
-        let arr = this._fillArr([NaN], this.size ** 2);
+        let arr = this._fillArr([null], this.size ** 2);
         if (this._checkCombinations(arr)) {
             return arr;
         } else return this._getArray();

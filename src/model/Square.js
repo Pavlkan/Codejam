@@ -6,6 +6,6 @@ export class Square {
     }
 
     isEmpty() {
-        return isNaN(this.number);
+        return this.number === null;
     }
 }

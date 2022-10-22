@@ -18,4 +18,10 @@ export class MenuController {
             this.gemPuzzle.getSize()
         );
     }
+
+    save() {
+        this.gemPuzzle.saveResults();
+    }
+
+    load() {}
 }

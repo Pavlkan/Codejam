@@ -57,9 +57,7 @@ h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
 }
 
 .square {
-    
     border: 1px solid green;
-    transition: transform 0.5s;
     background-color: white;
 }
 
@@ -96,6 +94,13 @@ h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
 
 .animate-right {
     transform: translateX(200px);
+}
+
+.animate-bottom,
+.animate-top,
+.animate-left,
+.animate-right {
+    transition: transform 0.5s;
 }
 
 .congratulations-modal {

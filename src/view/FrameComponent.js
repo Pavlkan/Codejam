@@ -1,3 +1,4 @@
+import { DnDContext } from "./drag-n-drop/DnDContext.js";
 import { SquareComponent } from "./SquareComponent.js";
 
 export class FrameComponent {
@@ -5,7 +6,7 @@ export class FrameComponent {
         this.element = document.createElement("div");
         this.element.classList.add("frame");
         this.frameController = null;
-        this.clicksLocked = false;
+        this.interactionLocked = false;
         this._addListeners();
     }
 
@@ -22,24 +23,52 @@ export class FrameComponent {
         this.frameController = controller;
     }
 
-    lockClicks() {
-        this.clicksLocked = true;
+    lockInteraction() {
+        this.interactionLocked = true;
     }
 
-    unlockClicks() {
-        this.clicksLocked = false;
+    unlockInteraction() {
+        this.interactionLocked = false;
     }
 
     _addListeners() {
-        this.element.addEventListener("click", (event) => {
-            if (this.clicksLocked) return;
+        // this.element.addEventListener("click", (event) => {
+        //     if (this.interactionLocked) return;
+        //     const squareElement = event.target.closest(".square");
+        //     if (squareElement) {
+        //         this.frameController.move(
+        //             squareElement.square,
+        //             squareElement.component
+        //         );
+        //     }
+        // });
+
+        this.element.addEventListener("mousedown", (event) => {
+            if (this.interactionLocked) return;
             const squareElement = event.target.closest(".square");
-            if (squareElement) {
-                this.frameController.move(
-                    squareElement.square,
-                    squareElement.component
-                );
+            if (squareElement && !squareElement.square.isEmpty()) {
+                this.dndContext = new DnDContext(squareElement, [
+                    event.clientX,
+                    event.clientY,
+                ]);
             }
+        });
+
+        this.element.addEventListener("mousemove", (event) => {
+            if (!this.dndContext || this.interactionLocked) return;
+            this.frameController.drag(
+                [event.clientX, event.clientY],
+                this.dndContext
+            );
+        });
+
+        document.addEventListener("mouseup", (event) => {
+            if (!this.dndContext || this.interactionLocked) return;
+            this.frameController.drop(
+                [event.clientX, event.clientY],
+                this.dndContext
+            );
+            this.dndContext = null;
         });
     }
 }

@@ -7,6 +7,7 @@ export class FrameComponent {
         this.element.classList.add("frame");
         this.frameController = null;
         this.interactionLocked = false;
+        this.skipNextClick = false;
         this._addListeners();
     }
 
@@ -32,16 +33,20 @@ export class FrameComponent {
     }
 
     _addListeners() {
-        // this.element.addEventListener("click", (event) => {
-        //     if (this.interactionLocked) return;
-        //     const squareElement = event.target.closest(".square");
-        //     if (squareElement) {
-        //         this.frameController.move(
-        //             squareElement.square,
-        //             squareElement.component
-        //         );
-        //     }
-        // });
+        this.element.addEventListener("click", (event) => {
+            if (this.skipNextClick) {
+                this.skipNextClick = false;
+                return;
+            }
+            if (this.interactionLocked) return;
+            const squareElement = event.target.closest(".square");
+            if (squareElement) {
+                this.frameController.move(
+                    squareElement.square,
+                    squareElement.component
+                );
+            }
+        });
 
         this.element.addEventListener("mousedown", (event) => {
             if (this.interactionLocked) return;
@@ -65,12 +70,16 @@ export class FrameComponent {
         document.addEventListener("mouseup", (event) => {
             if (!this.dndContext || this.interactionLocked) return;
             if (this._isInFrame(event.clientX, event.clientY)) {
-                this.frameController.drop(
-                    [event.clientX, event.clientY],
-                    this.dndContext
-                );
+                if (this._isDndEvent(event.clientX, event.clientY)) {
+                    this.frameController.drop(
+                        [event.clientX, event.clientY],
+                        this.dndContext
+                    );
+                    this.skipNextClick = true;
+                }
             } else {
                 this.frameController.rollBackDrag(this.dndContext);
+                this.skipNextClick = true;
             }
             this.dndContext = null;
         });
@@ -81,5 +90,10 @@ export class FrameComponent {
         let isInFrameX = x >= rect.left && x <= rect.left + rect.width;
         let isInFrameY = y >= rect.top && y <= rect.top + rect.height;
         return isInFrameX && isInFrameY;
+    }
+
+    _isDndEvent(x, y) {
+        let [originalX, originalY] = this.dndContext.initialCoordinates;
+        return originalX !== x || originalY !== y;
     }
 }

@@ -10,6 +10,15 @@ export class AutoCloser {
         );
     }
 
+    rollBackMove(context, direction) {
+        context.element.style.transition = "transform 0.3s ease-out";
+        if (direction === "top" || direction === "bottom") {
+            context.element.style.transform = "translateY(0px)";
+        } else if (direction === "left" || direction === "right") {
+            context.element.style.transform = "translateX(0px)";
+        }
+    }
+
     _setTranslation([offsetX, offsetY], direction, element) {
         element.style.transition = "transform 0.3s ease-out";
         if (direction === "top" || direction === "bottom") {

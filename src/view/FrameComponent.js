@@ -64,11 +64,22 @@ export class FrameComponent {
 
         document.addEventListener("mouseup", (event) => {
             if (!this.dndContext || this.interactionLocked) return;
-            this.frameController.drop(
-                [event.clientX, event.clientY],
-                this.dndContext
-            );
+            if (this._isInFrame(event.clientX, event.clientY)) {
+                this.frameController.drop(
+                    [event.clientX, event.clientY],
+                    this.dndContext
+                );
+            } else {
+                this.frameController.rollBackDrag(this.dndContext);
+            }
             this.dndContext = null;
         });
+    }
+
+    _isInFrame(x, y) {
+        let rect = this.element.getClientRects()[0];
+        let isInFrameX = x >= rect.left && x <= rect.left + rect.width;
+        let isInFrameY = y >= rect.top && y <= rect.top + rect.height;
+        return isInFrameX && isInFrameY;
     }
 }

@@ -36,6 +36,17 @@ export class FrameController {
         }, 300);
     }
 
+    rollBackDrag(context) {
+        let isGameCompleted = this.gemPuzzle.isCompleted();
+        let direction = this.gemPuzzle.getMoveDirection(context.element.square);
+        if (!direction || isGameCompleted) return;
+        this.frameComponent.lockInteraction();
+        this.autoCloser.rollBackMove(context, direction);
+        setTimeout(() => {
+            this.frameComponent.unlockInteraction();
+        }, 500);
+    }
+
     move(square, squareComponent) {
         let isGameCompleted = this.gemPuzzle.isCompleted();
         let direction = this.gemPuzzle.getMoveDirection(square);

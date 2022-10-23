@@ -1,4 +1,5 @@
 import { CongratulationsComponent } from "../view/CongratulationsComponent.js";
+import { AutoCloser } from "../view/drag-n-drop/AutoCloser.js";
 import { DnD } from "../view/drag-n-drop/DnD.js";
 
 export class FrameController {
@@ -9,6 +10,7 @@ export class FrameController {
         let movesCount = this.gemPuzzle.getGameState().movesCount;
         this.gameStateComponent.updateMoves(movesCount);
         this.dnd = new DnD();
+        this.autoCloser = new AutoCloser();
     }
 
     drag([x, y], context) {
@@ -22,18 +24,16 @@ export class FrameController {
         let isGameCompleted = this.gemPuzzle.isCompleted();
         let direction = this.gemPuzzle.getMoveDirection(context.element.square);
         if (!direction || isGameCompleted) return;
-        this.gemPuzzle.move(context.element.square);
-        let movesCount = this.gemPuzzle.getGameState().movesCount;
-        this.gameStateComponent.updateMoves(movesCount);
-        this.frameComponent.updateFrame(
-            this.gemPuzzle.getFrame().flat(),
-            this.gemPuzzle.getSize()
+        let isCompletedMove = this.autoCloser.completeMove(
+            [x, y],
+            context,
+            direction
         );
-        if (this.gemPuzzle.isCompleted()) {
-            this.gameStateComponent.stopTimer();
-        }
-        this.frameComponent.unlockInteraction();
-        this._showCongratulationIfNeeded();
+        this.frameComponent.lockInteraction();
+        setTimeout(() => {
+            if (isCompletedMove) this.gemPuzzle.move(context.element.square);
+            this._updateView();
+        }, 300);
     }
 
     move(square, squareComponent) {
@@ -45,18 +45,22 @@ export class FrameController {
 
         setTimeout(() => {
             this.gemPuzzle.move(square);
-            let movesCount = this.gemPuzzle.getGameState().movesCount;
-            this.gameStateComponent.updateMoves(movesCount);
-            this.frameComponent.updateFrame(
-                this.gemPuzzle.getFrame().flat(),
-                this.gemPuzzle.getSize()
-            );
-            if (this.gemPuzzle.gameCompleted) {
-                this.gameStateComponent.stopTimer();
-            }
-            this.frameComponent.unlockInteraction();
-            this._showCongratulationIfNeeded();
+            this._updateView();
         }, 500);
+    }
+
+    _updateView() {
+        let movesCount = this.gemPuzzle.getGameState().movesCount;
+        this.gameStateComponent.updateMoves(movesCount);
+        this.frameComponent.updateFrame(
+            this.gemPuzzle.getFrame().flat(),
+            this.gemPuzzle.getSize()
+        );
+        if (this.gemPuzzle.gameCompleted) {
+            this.gameStateComponent.stopTimer();
+        }
+        this.frameComponent.unlockInteraction();
+        this._showCongratulationIfNeeded();
     }
 
     _showCongratulationIfNeeded() {

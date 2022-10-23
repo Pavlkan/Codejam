@@ -74,5 +74,16 @@ export class GemPuzzle {
         }
     }
 
-    getResults() {}
+    getResults() {
+        let results = this.gameStatisticsStorage.getStatistics();
+        return results
+            .sort((a, b) => {
+                if (a.movesCount !== b.movesCount) {
+                    return a.movesCount - b.movesCount;
+                } else {
+                    return a.time - b.time;
+                }
+            })
+            .slice(0, 10);
+    }
 }

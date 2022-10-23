@@ -1,3 +1,5 @@
+import { ResultsComponent } from "../view/ResultsComponent.js";
+
 export class MenuController {
     constructor(gemPuzzle, frameComponent, gameStateComponent) {
         this.gemPuzzle = gemPuzzle;
@@ -21,6 +23,11 @@ export class MenuController {
         this.gameStateComponent.updateTimerField(
             this.gemPuzzle.getGameState().getStartTime()
         );
+    }
+
+    showResults() {
+        let results = new ResultsComponent(this.gemPuzzle.getResults());
+        document.body.append(results.element);
     }
 
     _initializeGameView() {

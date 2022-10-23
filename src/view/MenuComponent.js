@@ -20,6 +20,10 @@ export class MenuComponent {
         this.loadButton = document.createElement("button");
         this.loadButton.innerText = `Load`;
         this.element.append(this.loadButton);
+
+        this.showResultsButton = document.createElement("button");
+        this.showResultsButton.innerText = `Show results`;
+        this.element.append(this.showResultsButton);
     }
 
     _addListeners() {
@@ -34,5 +38,9 @@ export class MenuComponent {
         this.loadButton.addEventListener("click", () => {
             this.menuController.loadAndStart();
         });
+
+        this.showResultsButton.addEventListener('click', () => {
+            this.menuController.showResults();
+        })
     }
 }

@@ -39,8 +39,8 @@ export class MenuComponent {
             this.menuController.loadAndStart();
         });
 
-        this.showResultsButton.addEventListener('click', () => {
+        this.showResultsButton.addEventListener("click", () => {
             this.menuController.showResults();
-        })
+        });
     }
 }

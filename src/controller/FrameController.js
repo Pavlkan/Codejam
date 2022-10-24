@@ -3,7 +3,7 @@ import { AutoCloser } from "../view/drag-n-drop/AutoCloser.js";
 import { DnD } from "../view/drag-n-drop/DnD.js";
 
 export class FrameController {
-    constructor(gemPuzzle, frameComponent, gameStateComponent) {
+    constructor(gemPuzzle, frameComponent, gameStateComponent, soundComponent) {
         this.gemPuzzle = gemPuzzle;
         this.frameComponent = frameComponent;
         this.gameStateComponent = gameStateComponent;
@@ -11,6 +11,8 @@ export class FrameController {
         this.gameStateComponent.updateMoves(movesCount);
         this.dnd = new DnD();
         this.autoCloser = new AutoCloser();
+        this.soundComponent = soundComponent;
+        this.soundState = true;
     }
 
     drag([x, y], context) {
@@ -30,6 +32,9 @@ export class FrameController {
             direction
         );
         this.frameComponent.lockInteraction();
+        if (this.soundState && isCompletedMove) {
+            this._turnMoveSoundOn();
+        }
         setTimeout(() => {
             if (isCompletedMove) this.gemPuzzle.move(context.element.square);
             this._updateView();
@@ -50,14 +55,31 @@ export class FrameController {
     move(square, squareComponent) {
         let isGameCompleted = this.gemPuzzle.isCompleted();
         let direction = this.gemPuzzle.getMoveDirection(square);
-        if (!direction || isGameCompleted) return;
+        if (!direction || isGameCompleted) {
+            this._turnErrorSoundOn();
+            return;
+        }
         this.frameComponent.lockInteraction();
         squareComponent.animateMove(direction);
-
+        if (this.soundState) {
+            this._turnMoveSoundOn();
+        }
         setTimeout(() => {
             this.gemPuzzle.move(square);
             this._updateView();
         }, 500);
+    }
+
+    setSoundState(soundState) {
+        this.soundState = soundState;
+    }
+
+    _turnMoveSoundOn() {
+        this.soundComponent.audioElementMove.play();
+    }
+
+    _turnErrorSoundOn() {
+        this.soundComponent.audioElementError.play();
     }
 
     _updateView() {

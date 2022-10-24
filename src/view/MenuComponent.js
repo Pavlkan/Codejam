@@ -3,6 +3,7 @@ export class MenuComponent {
         this.menuController = menuController;
         this.element = document.createElement("div");
         this.element.classList.add("menu");
+        this.soundState = true;
 
         this._render();
         this._addListeners();
@@ -26,6 +27,57 @@ export class MenuComponent {
         this.element.append(this.showResultsButton);
 
         this._renderSelect();
+        this._renderSoundButtons();
+    }
+
+    _renderSoundButtons() {
+        let soundWrapper = document.createElement("div");
+        soundWrapper.classList.add("sound-wrapper");
+
+        let soundButtonOnWrapper = document.createElement("div");
+        soundButtonOnWrapper.classList.add("sound-button-on-wrapper");
+        this.soundButtonOn = document.createElement("input");
+        this.soundButtonOn.type = "radio";
+        this.soundButtonOn.checked = "true";
+        this.soundButtonOnLabel = document.createElement("label");
+        this.soundButtonOnSpan = document.createElement("span");
+        this.soundButtonOnSpan.innerText = `Sound On`;
+
+        let soundButtonOffWrapper = document.createElement("div");
+        soundButtonOffWrapper.classList.add("sound-button-off-wrapper");
+        this.soundButtonOff = document.createElement("input");
+        this.soundButtonOff.type = "radio";
+        this.soundButtonOff.checked = null;
+        this.soundButtonOffLabel = document.createElement("label");
+        this.soundButtonOffSpan = document.createElement("span");
+        this.soundButtonOffSpan.innerText = `Sound Off`;
+
+        soundButtonOnWrapper.append(
+            this.soundButtonOn,
+            this.soundButtonOnLabel,
+            this.soundButtonOnSpan
+        );
+
+        soundButtonOffWrapper.append(
+            this.soundButtonOff,
+            this.soundButtonOffLabel,
+            this.soundButtonOffSpan
+        );
+
+        soundWrapper.append(soundButtonOnWrapper, soundButtonOffWrapper);
+        this.element.append(soundWrapper);
+    }
+
+    _turnSoundOn() {
+        this.soundButtonOn.checked = "true";
+        this.soundButtonOff.checked = null;
+        this.soundState = true;
+    }
+
+    _turnSoundOff() {
+        this.soundButtonOn.checked = null;
+        this.soundButtonOff.checked = "true";
+        this.soundState = false;
     }
 
     _renderSelect() {
@@ -72,6 +124,16 @@ export class MenuComponent {
         this.sizeSelect.addEventListener("change", (event) => {
             let size = Number(event.target.value);
             this.menuController.changeSize(size);
+        });
+
+        this.soundButtonOn.addEventListener("change", (event) => {
+            this._turnSoundOn();
+            this.menuController.toggleSound(this.soundState);
+        });
+
+        this.soundButtonOff.addEventListener("change", (event) => {
+            this._turnSoundOff();
+            this.menuController.toggleSound(this.soundState);
         });
     }
 }

@@ -1,10 +1,20 @@
 import { ResultsComponent } from "../view/ResultsComponent.js";
 
 export class MenuController {
-    constructor(gemPuzzle, frameComponent, gameStateComponent) {
+    constructor(
+        gemPuzzle,
+        frameComponent,
+        gameStateComponent,
+        frameController
+    ) {
         this.gemPuzzle = gemPuzzle;
         this.frameComponent = frameComponent;
         this.gameStateComponent = gameStateComponent;
+        this.frameController = frameController;
+    }
+
+    toggleSound(soundState) {
+        this.frameController.setSoundState(soundState);
     }
 
     shuffleAndStart() {

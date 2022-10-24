@@ -6,7 +6,9 @@ export class SquareComponent {
     }
 
     animateMove(direction) {
-        this.element.classList.add(`animate-${direction}`);
+        let width = this.element.getClientRects()[0].width;
+        this.element.style.transform = this._getTranslation(width, direction);
+        this.element.style.transition = `transform 0.5s`;
     }
 
     _render(square, size) {
@@ -18,5 +20,17 @@ export class SquareComponent {
             this.element.innerText = square.number;
         }
         this.element.classList.add(size);
+    }
+
+    _getTranslation(width, direction) {
+        if (direction === "top") {
+            return `translateY(-${width}px)`;
+        } else if (direction === "bottom") {
+            return `translateY(${width}px)`;
+        } else if (direction === "left") {
+            return `translateX(-${width}px)`;
+        } else {
+            return `translateX(${width}px)`;
+        }
     }
 }

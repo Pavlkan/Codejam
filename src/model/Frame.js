@@ -84,12 +84,16 @@ export class Frame {
                 if (
                     currentNumber &&
                     comparedNumber &&
-                    currentNumber < comparedNumber
+                    currentNumber > comparedNumber
                 )
                     chaosSum++;
             }
         }
-        return chaosSum % 2 === 0;
+        if (this.size === 3) {
+            return chaosSum % 2 !== 0;
+        } else {
+            return chaosSum % 2 === 0;
+        }
     }
 
     _generateFrame(size, valuesArr = this._getArray()) {

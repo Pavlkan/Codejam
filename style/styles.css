@@ -47,6 +47,14 @@ img {vertical-align: top;}
 
 h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
 
+.wrapper {
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .frame {
     width: 402px;
     height: 402px;
@@ -63,13 +71,13 @@ h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
 }
 
 .small {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
 }
 
 .big {
-    width: 200px;
-    height: 200px;
+    width: 133px;
+    height: 133px;
 }
 
 .empty {
@@ -79,29 +87,6 @@ h1, h2, h3, h4, h5, h6 {font-size: inherit; font-weight: 400;}
 .state {
     display: flex;
 
-}
-
-.animate-top {
-    transform: translateY(-200px);
-}
-
-.animate-bottom {
-    transform: translateY(200px);
-}
-
-.animate-left {
-    transform: translateX(-200px);
-}
-
-.animate-right {
-    transform: translateX(200px);
-}
-
-.animate-bottom,
-.animate-top,
-.animate-left,
-.animate-right {
-    transition: transform 0.5s;
 }
 
 .congratulations-modal,

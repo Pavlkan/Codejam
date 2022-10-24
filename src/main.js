@@ -6,7 +6,7 @@ import { GameStateComponent } from "./view/GameStateComponent.js";
 import { MenuComponent } from "./view/MenuComponent.js";
 
 const root = document.getElementById("root");
-const gemPuzzle = new GemPuzzle(2);
+const gemPuzzle = new GemPuzzle(3);
 const frameComponent = new FrameComponent();
 const gameStateComponent = new GameStateComponent();
 const frameController = new FrameController(

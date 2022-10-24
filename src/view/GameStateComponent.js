@@ -11,8 +11,9 @@ export class GameStateComponent {
 
     startTimer(startTime) {
         this.stopTimer();
+        this._updateTimerField(startTime);
         this.timerId = setInterval(() => {
-            this.updateTimerField(startTime);
+            this._updateTimerField(startTime);
         }, 1000);
     }
 
@@ -20,7 +21,7 @@ export class GameStateComponent {
         clearInterval(this.timerId);
     }
 
-    updateTimerField(startTime) {
+    _updateTimerField(startTime) {
         let parsedTime = startTime ? this._parseTime(startTime) : `0:0`;
         this.timerField.innerText = `Time: ${parsedTime}`;
     }
@@ -39,7 +40,7 @@ export class GameStateComponent {
 
         this.timerField = document.createElement("div");
         this.timerField.classList.add("timer-field");
-        this.updateTimerField();
+        this._updateTimerField();
         this.element.append(this.timerField);
     }
 }

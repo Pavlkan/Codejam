@@ -48,6 +48,11 @@ export class GemPuzzle {
         return successMove;
     }
 
+    changeSize(size) {
+        this.size = size;
+        this.shuffleAndStart();
+    }
+
     getMoveDirection(square) {
         return this.frame.getMoveDirection(square);
     }

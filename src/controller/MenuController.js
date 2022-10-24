@@ -10,7 +10,6 @@ export class MenuController {
     shuffleAndStart() {
         this.gemPuzzle.shuffleAndStart();
         this._initializeGameView();
-        this.gameStateComponent.updateTimerField();
     }
 
     save() {
@@ -20,14 +19,16 @@ export class MenuController {
     loadAndStart() {
         this.gemPuzzle.loadAndStart();
         this._initializeGameView();
-        this.gameStateComponent.updateTimerField(
-            this.gemPuzzle.getGameState().getStartTime()
-        );
     }
 
     showResults() {
         let results = new ResultsComponent(this.gemPuzzle.getResults());
         document.body.append(results.element);
+    }
+
+    changeSize(size) {
+        this.gemPuzzle.changeSize(size);
+        this._initializeGameView();
     }
 
     _initializeGameView() {

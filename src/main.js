@@ -6,7 +6,11 @@ import { GameStateComponent } from "./view/GameStateComponent.js";
 import { MenuComponent } from "./view/MenuComponent.js";
 import { SoundComponent } from "./view/SoundComponent.js";
 
-const root = document.getElementById("root");
+const root = document.createElement("main");
+root.id = "root";
+root.classList.add("wrapper");
+document.body.append(root);
+
 const gemPuzzle = new GemPuzzle(3);
 const soundComponent = new SoundComponent();
 const frameComponent = new FrameComponent();

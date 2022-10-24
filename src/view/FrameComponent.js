@@ -13,7 +13,7 @@ export class FrameComponent {
 
     updateFrame(squares, size) {
         this.element.innerHTML = ``;
-        let sizeClass = size === 4 ? "small" : "big";
+        let sizeClass = this._setFrameSize(size);
         for (let square of squares) {
             let component = new SquareComponent(square, sizeClass);
             this.element.append(component.element);
@@ -30,6 +30,15 @@ export class FrameComponent {
 
     unlockInteraction() {
         this.interactionLocked = false;
+    }
+
+    _setFrameSize(size) {
+        let sizeMap = {
+            4: "small",
+            3: "big",
+            2: "huge",
+        };
+        return sizeMap[size];
     }
 
     _addListeners() {

@@ -1,7 +1,11 @@
 export class SoundComponent {
     constructor() {
-        this.audioElementMove = new Audio("../../move.mp3");
-        this.audioElementError = new Audio("../../error.mp3");
+        this.audioElementMove = new Audio(
+            "https://zvukogram.com/mp3/cats/2712/zvuk-najatiya-na-knopku.mp3"
+        );
+        this.audioElementError = new Audio(
+            "https://zvukogram.com/mp3/cats/2607/zvuk9.mp3"
+        );
     }
 
     playSuccess() {

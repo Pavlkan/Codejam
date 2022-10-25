@@ -17,9 +17,12 @@ export class ResultsComponent {
                 } seconds \n`
             );
         }, "");
+        let resultsText =
+            resultsList ||
+            `You need to complete at least one game to see statistics.`;
         statisticsField.innerText = `
             Top 10 results based on moves
-            ${resultsList}
+            ${resultsText}
         `;
         this.element.append(statisticsField);
 

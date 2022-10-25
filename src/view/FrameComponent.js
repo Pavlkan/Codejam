@@ -34,6 +34,10 @@ export class FrameComponent {
 
     _setFrameSize(size) {
         let sizeMap = {
+            8: "eight",
+            7: "seven",
+            6: "six",
+            5: "five",
             4: "small",
             3: "big",
             2: "huge",

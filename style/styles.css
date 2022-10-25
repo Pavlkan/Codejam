@@ -100,6 +100,26 @@ button {
     height: 200px;
 }
 
+.five {
+    width: 80px;
+    height: 80px;
+}
+
+.six {
+    width: 66.6px;
+    height: 66.6px;
+}
+
+.seven {
+    width: 57.1px;
+    height: 57.1px;
+}
+
+.eight {
+    width: 50px;
+    height: 50px;
+}
+
 .empty {
     background-color: gray;
 }
@@ -147,4 +167,93 @@ button {
     font-size: 20px;
     color: aliceblue;
     background-color: rgb(128, 128, 128);
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        padding: 50px;
+        flex-direction: column;
+        
+    }
+
+    .menu {
+        width: 50%;
+        font-size: 25px;
+    }
+
+    .button-wrapper {
+        width: 75vw;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .select-wrapper {
+        width: 75vw;
+    }
+    
+    .sound-wrapper {
+        width: 75vw;
+    }
+
+    button {
+        min-width: 15vw;
+        min-height: 20px;
+        flex-wrap: wrap;
+        margin: 15px 5px;
+    
+        border: 3px solid rgb(125, 148, 156);
+        border-radius: 10px;
+    
+        font-size: 3vw;
+    
+        background: radial-gradient(#f2f2f2,#dbdbdb,#eaeaea);
+        
+    }
+}
+
+@media (max-width: 640px) {
+    .frame {
+        width: 80.4vw;
+        height: 80.4vw;
+        border: 1px solid black;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: gray;
+    
+    }
+
+    .small {
+        width: 19.94vw;
+        height: 19.94vw;
+    }
+    
+    .big {
+        width: 26.58vw;
+        height: 26.58vw;
+    }
+    
+    .huge {
+        width: 39.8vw;
+        height: 39.8vw;
+    }
+
+    .five {
+        width: 15.95vw;
+        height: 15.95vw;
+    }
+
+    .six {
+        width: 13.29vw;
+        height: 13.29vw;
+    }
+
+    .seven {
+        width: 11.39vw;
+        height: 11.39vw;
+    }
+
+    .eight {
+        width: 9.97vw;
+        height: 9.97vw;
+    }
 }

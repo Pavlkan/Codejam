@@ -105,7 +105,27 @@ export class MenuComponent {
         let optionFour = document.createElement("option");
         optionFour.innerText = `4x4`;
         optionFour.value = 4;
-        this.sizeSelect.append(optionTwo, optionTree, optionFour);
+        let optionFive = document.createElement("option");
+        optionFive.innerText = `5x5`;
+        optionFive.value = 5;
+        let optionSix = document.createElement("option");
+        optionSix.innerText = `6x6`;
+        optionSix.value = 6;
+        let optionSeven = document.createElement("option");
+        optionSeven.innerText = `7x7`;
+        optionSeven.value = 7;
+        let optionEight = document.createElement("option");
+        optionEight.innerText = `8x8`;
+        optionEight.value = 8;
+        this.sizeSelect.append(
+            optionTwo,
+            optionTree,
+            optionFour,
+            optionFive,
+            optionSix,
+            optionSeven,
+            optionEight
+        );
     }
 
     _addListeners() {

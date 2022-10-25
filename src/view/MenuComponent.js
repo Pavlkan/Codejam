@@ -10,21 +10,25 @@ export class MenuComponent {
     }
 
     _render() {
+        this.buttonWrapper = document.createElement("dev");
+        this.buttonWrapper.classList.add("button-wrapper");
+
         this.startButton = document.createElement("button");
         this.startButton.innerText = `Shuffle and start`;
-        this.element.append(this.startButton);
+        this.buttonWrapper.append(this.startButton);
 
         this.saveButton = document.createElement("button");
         this.saveButton.innerText = `Save`;
-        this.element.append(this.saveButton);
+        this.buttonWrapper.append(this.saveButton);
 
         this.loadButton = document.createElement("button");
         this.loadButton.innerText = `Load`;
-        this.element.append(this.loadButton);
+        this.buttonWrapper.append(this.loadButton);
 
         this.showResultsButton = document.createElement("button");
         this.showResultsButton.innerText = `Show results`;
-        this.element.append(this.showResultsButton);
+        this.buttonWrapper.append(this.showResultsButton);
+        this.element.append(this.buttonWrapper);
 
         this._renderSelect();
         this._renderSoundButtons();

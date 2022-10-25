@@ -13,8 +13,8 @@ export class ResultsComponent {
             return (
                 results +
                 `${index + 1}. Moves:${result.movesCount}, Time: ${
-                    result.time
-                } \n`
+                    result.time / 1000
+                } seconds \n`
             );
         }, "");
         statisticsField.innerText = `

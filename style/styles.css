@@ -138,6 +138,13 @@ button {
     align-items: center;
 }
 
+@media (min-width: 1000px) {
+    .state,
+    .menu {
+        width: 20%;
+    }
+}
+
 .button-wrapper {
     display: flex;
     flex-direction: column;
@@ -153,6 +160,7 @@ button {
 
 .congratulations-modal,
 .results-modal {
+    padding: 20px;
     position:absolute;
     top: 0;
     left: 0;
@@ -171,7 +179,7 @@ button {
 
 @media (max-width: 1000px) {
     .wrapper {
-        padding: 50px;
+        padding: 40px;
         flex-direction: column;
         
     }

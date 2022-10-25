@@ -10,21 +10,25 @@ export class MenuComponent {
     }
 
     _render() {
+        this.buttonWrapper = document.createElement("dev");
+        this.buttonWrapper.classList.add("button-wrapper");
+
         this.startButton = document.createElement("button");
         this.startButton.innerText = `Shuffle and start`;
-        this.element.append(this.startButton);
+        this.buttonWrapper.append(this.startButton);
 
         this.saveButton = document.createElement("button");
         this.saveButton.innerText = `Save`;
-        this.element.append(this.saveButton);
+        this.buttonWrapper.append(this.saveButton);
 
         this.loadButton = document.createElement("button");
         this.loadButton.innerText = `Load`;
-        this.element.append(this.loadButton);
+        this.buttonWrapper.append(this.loadButton);
 
         this.showResultsButton = document.createElement("button");
         this.showResultsButton.innerText = `Show results`;
-        this.element.append(this.showResultsButton);
+        this.buttonWrapper.append(this.showResultsButton);
+        this.element.append(this.buttonWrapper);
 
         this._renderSelect();
         this._renderSoundButtons();
@@ -101,7 +105,27 @@ export class MenuComponent {
         let optionFour = document.createElement("option");
         optionFour.innerText = `4x4`;
         optionFour.value = 4;
-        this.sizeSelect.append(optionTwo, optionTree, optionFour);
+        let optionFive = document.createElement("option");
+        optionFive.innerText = `5x5`;
+        optionFive.value = 5;
+        let optionSix = document.createElement("option");
+        optionSix.innerText = `6x6`;
+        optionSix.value = 6;
+        let optionSeven = document.createElement("option");
+        optionSeven.innerText = `7x7`;
+        optionSeven.value = 7;
+        let optionEight = document.createElement("option");
+        optionEight.innerText = `8x8`;
+        optionEight.value = 8;
+        this.sizeSelect.append(
+            optionTwo,
+            optionTree,
+            optionFour,
+            optionFive,
+            optionSix,
+            optionSeven,
+            optionEight
+        );
     }
 
     _addListeners() {

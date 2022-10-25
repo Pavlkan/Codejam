@@ -9,7 +9,9 @@ export class CongratulationsComponent {
     _render(gameState) {
         let message = document.createElement("div");
         message.classList.add("congratulations-message");
-        message.innerText = `Hooray! You solved the puzzle in ${gameState.getSpentTime()} and ${gameState.getMovesCount()} moves!`;
+        message.innerText = `Hooray! You solved the puzzle in ${
+            gameState.getSpentTime() / 1000
+        } seconds and ${gameState.getMovesCount()} moves!`;
         this.element.append(message);
 
         this.button = document.createElement("button");

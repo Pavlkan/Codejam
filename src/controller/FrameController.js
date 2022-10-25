@@ -1,9 +1,10 @@
 import { CongratulationsComponent } from "../view/CongratulationsComponent.js";
 import { AutoCloser } from "../view/drag-n-drop/AutoCloser.js";
 import { DnD } from "../view/drag-n-drop/DnD.js";
+import { SoundComponent } from "../view/SoundComponent.js";
 
 export class FrameController {
-    constructor(gemPuzzle, frameComponent, gameStateComponent, soundComponent) {
+    constructor(gemPuzzle, frameComponent, gameStateComponent) {
         this.gemPuzzle = gemPuzzle;
         this.frameComponent = frameComponent;
         this.gameStateComponent = gameStateComponent;
@@ -11,7 +12,7 @@ export class FrameController {
         this.gameStateComponent.updateMoves(movesCount);
         this.dnd = new DnD();
         this.autoCloser = new AutoCloser();
-        this.soundComponent = soundComponent;
+        this.soundComponent = new SoundComponent();
         this.soundState = true;
     }
 
@@ -32,8 +33,8 @@ export class FrameController {
             direction
         );
         this.frameComponent.lockInteraction();
-        if (this.soundState && isCompletedMove) {
-            this._turnMoveSoundOn();
+        if (isCompletedMove) {
+            this._playSoundIfNeeded(true);
         }
         setTimeout(() => {
             if (isCompletedMove) this.gemPuzzle.move(context.element.square);
@@ -56,14 +57,12 @@ export class FrameController {
         let isGameCompleted = this.gemPuzzle.isCompleted();
         let direction = this.gemPuzzle.getMoveDirection(square);
         if (!direction || isGameCompleted) {
-            this._turnErrorSoundOn();
+            this._playSoundIfNeeded(false);
             return;
         }
         this.frameComponent.lockInteraction();
         squareComponent.animateMove(direction);
-        if (this.soundState) {
-            this._turnMoveSoundOn();
-        }
+        this._playSoundIfNeeded(true);
         setTimeout(() => {
             this.gemPuzzle.move(square);
             this._updateView();
@@ -74,12 +73,13 @@ export class FrameController {
         this.soundState = soundState;
     }
 
-    _turnMoveSoundOn() {
-        this.soundComponent.audioElementMove.play();
-    }
-
-    _turnErrorSoundOn() {
-        this.soundComponent.audioElementError.play();
+    _playSoundIfNeeded(success) {
+        if (!this.soundState) return;
+        if (success) {
+            this.soundComponent.playSuccess();
+        } else {
+            this.soundComponent.playError();
+        }
     }
 
     _updateView() {
